@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
         mInBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateInBackground(false);
+                updateInBackground(true);
             }
         });
 
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
         mNotInBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateInBackground(true);
+                updateInBackground(false);
             }
         });
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
         super.onResume();
 
         String category = mStorage.loadCurrentTopic();
-        if(category.length() == 0){
+        if(category.isEmpty()){
             mStorage.saveCurrentTopic("it");
         }
 
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
     public void onNewsLoaded(int resultCode){
         if(resultCode == NewsIntentService.RESULT_ERROR){
             Toast.makeText(getApplicationContext(), R.string.error, Toast.LENGTH_SHORT).show();
+            return;
         }
         News news = Storage.getInstance(this).getLastSavedNews();
         mTitle.setText(news.getTitle());
@@ -122,9 +123,8 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
     }
 
     public void updateInBackground(boolean update){
-        Intent intent = new Intent();
         if(update){
-             Scheduler.getInstance().schedule(this, ServiceHelper.getInstance(this).getIntent(), 60000);
+             Scheduler.getInstance().schedule(this, ServiceHelper.getInstance(this).getIntent(), 60*1000L);
         } else {
              Scheduler.getInstance().unschedule(this, ServiceHelper.getInstance(this).getIntent());
         }

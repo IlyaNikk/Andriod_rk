@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
 
     private Storage mStorage;
 
-    private final ServiceHelper mServiceHelper = ServiceHelper.getInstance(this);
+    private final ServiceHelper mServiceHelper = ServiceHelper.getInstance();
 
     static {
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
             @Override
             public void onClick(View v) {
                 String category = mStorage.loadCurrentTopic();
-                ServiceHelper serviceHelper = ServiceHelper.getInstance(MainActivity.this);
+                ServiceHelper serviceHelper = ServiceHelper.getInstance();
                 serviceHelper.requestNews(MainActivity.this);
             }
         });
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
             mStorage.saveCurrentTopic("it");
         }
 
-        ServiceHelper serviceHelper = ServiceHelper.getInstance(this);
+        ServiceHelper serviceHelper = ServiceHelper.getInstance();
         serviceHelper.requestNews(this);
 
     }
@@ -122,11 +122,13 @@ public class MainActivity extends AppCompatActivity implements ServiceHelper.Cal
         mContent.setText(news.getBody());
     }
 
-    public void updateInBackground(boolean update){
+    private void updateInBackground(boolean update){
+        Intent intent = new Intent(this, NewsIntentService.class);
+        intent.putExtra("news_ResultReciever", mServiceHelper.getmReciever());
         if(update){
-             Scheduler.getInstance().schedule(this, ServiceHelper.getInstance(this).getIntent(), 60*1000L);
+             Scheduler.getInstance().schedule(this, intent, 60*1000L);
         } else {
-             Scheduler.getInstance().unschedule(this, ServiceHelper.getInstance(this).getIntent());
+             Scheduler.getInstance().unschedule(this, intent);
         }
     }
 

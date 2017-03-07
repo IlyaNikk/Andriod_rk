@@ -17,25 +17,20 @@ public class ServiceHelper {
 
     private MyResultReciever mReciever = new MyResultReciever(new Handler());
 
-    private static Intent serviceIntent;
-
     private ServiceHelper(){}
 
-    public static ServiceHelper getInstance(Context context) {
-        if(serviceIntent == null){
-            serviceIntent = new Intent(context, NewsIntentService.class);
-        }
+    public static ServiceHelper getInstance() {
         return instance;
+    }
+
+    public MyResultReciever getmReciever(){
+        return mReciever;
     }
 
     public void requestNews(Context context){
         Intent intent = new Intent(context, NewsIntentService.class);
         intent.putExtra(NewsIntentService.NEWS_RESULTRECIEVER, mReciever);
         context.startService(intent);
-    }
-
-    public Intent getIntent(){
-        return serviceIntent;
     }
 
     public void setCallback (Callback callback){

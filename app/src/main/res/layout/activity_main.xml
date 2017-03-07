@@ -8,13 +8,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.ilya.andriod_rk1.MainActivity">
+    tools:context="com.example.ilya.andriod_rk1.Activities.Activity.MainActivity">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ololofvgkdfmmbgvkfdnvkdfv"/>
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/stat"
@@ -29,15 +28,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_toRightOf="@id/stat"
-        android:layout_marginLeft="18dp"
-        android:text="afdvafvsfdvfvcv"/>
+        android:layout_marginLeft="18dp" />
 
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stat"
-        android:text="afdvsdfvsdfvsdfvsdfvsfdv"/>
+        android:layout_below="@+id/stat"/>
 
     <Button
         android:id="@+id/refresh"

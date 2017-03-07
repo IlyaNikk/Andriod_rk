@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Andriod_rk1</string>
+    <string name="date">Дата:</string>
+    <string name="refresh">Обновить</string>
+    <string name="change_category">Изменить категорию</string>
+    <string name="background">Обновлять в фоне</string>
+    <string name="no_background">Не обновлять в фоне</string>
+</resources>
